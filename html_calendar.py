@@ -5,9 +5,10 @@ from calendar_utils import generate_html_calendar, get_feriados
 # Quantos dias de aula teórica
 diasTeorico = 0
 
-def pintar_dia(html, dia, mes, ano, feriados, start_date, end_date):
+def pintar_dia(html, dia, mes, ano, feriados, start_date, end_date, isPrimeiroMes):
     global diasTeorico
     nome_dia = ""
+    qtd_dias_treinamento_inicial = 12 
     for i in range(1, 32):
         try:
             dia_atual = date(ano, mes, i)
@@ -18,16 +19,24 @@ def pintar_dia(html, dia, mes, ano, feriados, start_date, end_date):
                 continue
             nome_dia = dia_atual.strftime("%a").lower()
 
-            #Se o dia da próxima iteração for feriado e hoje for segunda ou sexta, será vermelho
+            #Se o dia da próxima iteração for feriado e hoje for segunda ou sexta, será amarelo
             if ((nome_dia == 'mon' or nome_dia == 'fri') and amanha in feriados):
                 html = html.replace(f'<td class="{nome_dia}">{i}</td>', 
                                     f'<td class="highlight-near-holiday">{i}</td>') 
+                continue
                 
-
             # Se for feriado, será vermelho
             if dia_atual in feriados:
                 html = html.replace(f'<td class="{nome_dia}">{i}</td>', 
-                                    f'<td class="highlight-holiday">{i}</td>') 
+                                    f'<td class="highlight-holiday">{i}</td>')
+                continue
+            #os primeiros doze dias são de treinamento teórico
+            if qtd_dias_treinamento_inicial != 0 and isPrimeiroMes and nome_dia != 'sat' and nome_dia != 'sun':
+                html = html.replace(f'<td class="{nome_dia}">{i}</td>', 
+                                    f'<td class="highlight">{i}</td>')
+                diasTeorico += 1
+                qtd_dias_treinamento_inicial -= 1        
+                continue        
                 
             # Se tiver aula, será verde           
             elif dia_atual.weekday() == dia:
@@ -53,10 +62,13 @@ html_months_list = generate_html_calendar(start_date_str, end_date_str, locale='
 
 # Loop sobre anos e meses
 html_calendar = ""
-for data, html in html_months_list:
+for index, (data, html) in enumerate(html_months_list):
     mes = data.month
     ano = data.year
-    html_calendar += pintar_dia(html, 0, mes, ano, feriados, start_date, end_date) 
+    isPrimeiroAno = False
+    if index == 0:
+        isPrimeiroAno = True
+    html_calendar += pintar_dia(html, 0, mes, ano, feriados, start_date, end_date, isPrimeiroAno) 
 
 html_content = f"""
 <!DOCTYPE html>

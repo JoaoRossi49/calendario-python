@@ -64,6 +64,8 @@ def get_feriados(ano_inicial, ano_final):
         feriados_moveis.append(carnaval)
         aniversario_marilia = date(ano,4,4) #adiciona o aniversário de marília
         feriados_moveis.append(aniversario_marilia)
+        vespera_natal = date(ano,12,24)
+        feriados_moveis.append(vespera_natal)
     
     # Combinar feriados fixos e móveis
     todos_feriados = list(br_holidays.keys()) + feriados_moveis
