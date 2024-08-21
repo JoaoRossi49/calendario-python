@@ -1,45 +1,62 @@
 import calendar
-from datetime import date
+from datetime import date, datetime
 from calendar_utils import generate_html_calendar, get_feriados
 
-# Definir os feriados
-feriados = get_feriados(2024, 2026)
-
-#Quantos dias de aula teórica
+# Quantos dias de aula teórica
 diasTeorico = 0
 
-def pintar_dia(html, dia, mes, feriados):
+def pintar_dia(html, dia, mes, ano, feriados, start_date, end_date):
     global diasTeorico
-    diasTreinamentoInicial = 12
+    nome_dia = ""
     for i in range(1, 32):
         try:
-            dia_atual = date(2024, mes, i)
-            #Se for feriado, mesmo se tiver aula, será vermelho
-            if dia_atual.weekday() == dia and dia_atual in feriados:
-                html = html.replace(f'<td class="{dia_atual.strftime("%a").lower()}">{i}</td>', 
+            dia_atual = date(ano, mes, i)
+            amanha = date(ano, mes, i+1)
+            nome_dia = dia_atual.strftime("%a").lower()     
+
+            if not (start_date <= dia_atual <= end_date):
+                continue
+            nome_dia = dia_atual.strftime("%a").lower()
+
+            #Se o dia da próxima iteração for feriado e hoje for segunda ou sexta, será vermelho
+            if ((nome_dia == 'mon' or nome_dia == 'fri') and amanha in feriados):
+                html = html.replace(f'<td class="{nome_dia}">{i}</td>', 
+                                    f'<td class="highlight-near-holiday">{i}</td>') 
+                
+
+            # Se for feriado, será vermelho
+            if dia_atual in feriados:
+                html = html.replace(f'<td class="{nome_dia}">{i}</td>', 
                                     f'<td class="highlight-holiday">{i}</td>') 
-            #Se for feriado, será vermelho
-            elif dia_atual in feriados:
-                html = html.replace(f'<td class="{dia_atual.strftime("%a").lower()}">{i}</td>', 
-                                    f'<td class="highlight-holiday">{i}</td>')     
-            #Se tiver aula, será verde           
+                
+            # Se tiver aula, será verde           
             elif dia_atual.weekday() == dia:
-                html = html.replace(f'<td class="{dia_atual.strftime("%a").lower()}', 
-                                    f'<td class="highlight')
+                html = html.replace(f'<td class="{nome_dia}">{i}</td>', 
+                                    f'<td class="highlight">{i}</td>')
                 diasTeorico += 1
-               
-        except:
-            pass
+
+        except Exception as e:
+            continue
     return html
 
-start_date = "17/01/2024"
-end_date = "17/12/2024"
+# Ajustar as datas de início e fim
+start_date_str = "10/02/2024"
+end_date_str = "17/12/2025"
 
-html_calendar = generate_html_calendar(start_date, end_date, locale='pt_BR')
+start_date = datetime.strptime(start_date_str, "%d/%m/%Y").date()
+end_date = datetime.strptime(end_date_str, "%d/%m/%Y").date()
 
-# Aluno terá aulas na segunda-feira (weekday 0 é segunda-feira)
-for mes in range(1, 12):
-    html_calendar = pintar_dia(html_calendar, 0, mes, feriados)
+# Definir os feriados
+feriados = get_feriados(start_date.year, end_date.year)
+
+html_months_list = generate_html_calendar(start_date_str, end_date_str, locale='pt_BR')
+
+# Loop sobre anos e meses
+html_calendar = ""
+for data, html in html_months_list:
+    mes = data.month
+    ano = data.year
+    html_calendar += pintar_dia(html, 0, mes, ano, feriados, start_date, end_date) 
 
 html_content = f"""
 <!DOCTYPE html>
@@ -47,7 +64,7 @@ html_content = f"""
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendário Agosto 2024</title>
+    <title>Calendário 2024-2025</title>
     <style>
         table {{
             width: 100%;
@@ -71,6 +88,11 @@ html_content = f"""
             color: white;
             font-weight: bold;
         }}
+        .highlight-near-holiday {{
+            background-color: yellow;
+            color: white;
+            font-weight: bold;
+        }}        
     </style>
 </head>
 <body>

@@ -1,5 +1,5 @@
 from calendar import LocaleHTMLCalendar
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 import itertools
 import holidays
 
@@ -27,16 +27,49 @@ def generate_html_calendar(start_date, end_date, locale='pt_BR.UTF-8'):
             months.append((year, month))
 
     # Gera o HTML para cada mês
-    html_output = ""
+    html_months_list = []
     for year, month in months:
-        html_output += cal.formatmonth(year, month)
+        html_output = cal.formatmonth(year, month)
         html_output += "<br><br>"
+        tupla = (date(year, month, 1), html_output)
+        html_months_list.append(tupla)
 
-    return html_output
+    return html_months_list
 
+def calcular_data_pascoa(ano):
+    a = ano % 19
+    b = ano // 100
+    c = ano % 100
+    d = b // 4
+    e = b % 4
+    f = (b + 8) // 25
+    g = (b - f + 1) // 3
+    h = (19 * a + b - d - g + 15) % 30
+    i = c // 4
+    k = c % 4
+    l = (32 + 2 * e + 2 * i - h - k) % 7
+    m = (a + 11 * h + 22 * l) // 451
+    mes = (h + l - 7 * m + 114) // 31
+    dia = ((h + l - 7 * m + 114) % 31) + 1
+    return date(ano, mes, dia)
 
 def get_feriados(ano_inicial, ano_final):
-    br_holidays = holidays.Brazil(years=[ano_inicial, ano_final], subdiv='SP')
-    feriados = sorted(list(br_holidays.keys()))
-    feriados_list = [date(feriado.year, feriado.month, feriado.day) for feriado in feriados]
+    # Feriados nacionais e estaduais/microrregionais
+    br_holidays = holidays.Brazil(years=range(ano_inicial, ano_final + 1), subdiv='SP')
+    
+    feriados_moveis = []
+    for ano in range(ano_inicial, ano_final + 1):
+        pascoa = calcular_data_pascoa(ano)
+        carnaval = pascoa - timedelta(days=47)  # Carnaval é 47 dias antes da Páscoa
+        feriados_moveis.append(carnaval)
+        aniversario_marilia = date(ano,4,4) #adiciona o aniversário de marília
+        feriados_moveis.append(aniversario_marilia)
+    
+    # Combinar feriados fixos e móveis
+    todos_feriados = list(br_holidays.keys()) + feriados_moveis
+    todos_feriados.sort()  # Ordenar por data
+    
+    # Converter para objetos date
+    feriados_list = [date(feriado.year, feriado.month, feriado.day) for feriado in todos_feriados]
+
     return feriados_list
