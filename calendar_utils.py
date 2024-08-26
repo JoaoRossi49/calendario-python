@@ -3,6 +3,51 @@ from datetime import datetime, date, timedelta
 import itertools
 import holidays
 
+
+def pintar_dia(html, dia, mes, ano, feriados, start_date, end_date, isPrimeiroMes):
+    diasTeorico = 0
+    nome_dia = ""
+    qtd_dias_treinamento_inicial = 12 
+    for i in range(1, 32):
+        try:
+            dia_atual = date(ano, mes, i)
+            amanha = date(ano, mes, i+1)
+            nome_dia = dia_atual.strftime("%a").lower()     
+
+            if not (start_date <= dia_atual <= end_date):
+                continue
+            nome_dia = dia_atual.strftime("%a").lower()
+
+            #Se o dia da próxima iteração for feriado e hoje for segunda ou sexta, será amarelo
+            if ((nome_dia == 'mon' or nome_dia == 'thu') and amanha in feriados):
+                html = html.replace(f'<td class="{nome_dia}">{i}</td>', 
+                                    f'<td class="highlight-near-holiday">{i}</td>') 
+                continue
+                
+            # Se for feriado, será vermelho
+            if dia_atual in feriados:
+                html = html.replace(f'<td class="{nome_dia}">{i}</td>', 
+                                    f'<td class="highlight-holiday">{i}</td>')
+                continue
+            #os primeiros doze dias são de treinamento teórico
+            if qtd_dias_treinamento_inicial != 0 and isPrimeiroMes and nome_dia != 'sat' and nome_dia != 'sun':
+                html = html.replace(f'<td class="{nome_dia}">{i}</td>', 
+                                    f'<td class="highlight">{i}</td>')
+                diasTeorico += 1
+                qtd_dias_treinamento_inicial -= 1        
+                continue        
+                
+            # Se tiver aula, será verde           
+            elif dia_atual.weekday() == dia:
+                html = html.replace(f'<td class="{nome_dia}">{i}</td>', 
+                                    f'<td class="highlight">{i}</td>')
+                diasTeorico += 1
+
+        except Exception as e:
+            continue
+    return html
+
+
 def generate_html_calendar(start_date, end_date, locale='pt_BR.UTF-8'):
     # Inicializa o calendário com a localidade especificada
     cal = LocaleHTMLCalendar(locale=locale)

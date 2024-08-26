@@ -1,122 +1,56 @@
 import calendar
 from datetime import date, datetime
-from calendar_utils import generate_html_calendar, get_feriados
+from calendar_utils import generate_html_calendar, get_feriados, pintar_dia
 
-# Quantos dias de aula teórica
-diasTeorico = 0
+def gerar_calendario():
+    # Ajustar as datas de início e fim
+    start_date_str = "17/01/2024"
+    end_date_str = "17/12/2025"
+    
+    diasTeorico = 0
 
-def pintar_dia(html, dia, mes, ano, feriados, start_date, end_date, isPrimeiroMes):
-    global diasTeorico
-    nome_dia = ""
-    qtd_dias_treinamento_inicial = 12 
-    for i in range(1, 32):
-        try:
-            dia_atual = date(ano, mes, i)
-            amanha = date(ano, mes, i+1)
-            nome_dia = dia_atual.strftime("%a").lower()     
+    start_date = datetime.strptime(start_date_str, "%d/%m/%Y").date()
+    end_date = datetime.strptime(end_date_str, "%d/%m/%Y").date()
 
-            if not (start_date <= dia_atual <= end_date):
-                continue
-            nome_dia = dia_atual.strftime("%a").lower()
+    # Definir os feriados
+    feriados = get_feriados(start_date.year, end_date.year)
 
-            #Se o dia da próxima iteração for feriado e hoje for segunda ou sexta, será amarelo
-            if ((nome_dia == 'mon' or nome_dia == 'fri') and amanha in feriados):
-                html = html.replace(f'<td class="{nome_dia}">{i}</td>', 
-                                    f'<td class="highlight-near-holiday">{i}</td>') 
-                continue
-                
-            # Se for feriado, será vermelho
-            if dia_atual in feriados:
-                html = html.replace(f'<td class="{nome_dia}">{i}</td>', 
-                                    f'<td class="highlight-holiday">{i}</td>')
-                continue
-            #os primeiros doze dias são de treinamento teórico
-            if qtd_dias_treinamento_inicial != 0 and isPrimeiroMes and nome_dia != 'sat' and nome_dia != 'sun':
-                html = html.replace(f'<td class="{nome_dia}">{i}</td>', 
-                                    f'<td class="highlight">{i}</td>')
-                diasTeorico += 1
-                qtd_dias_treinamento_inicial -= 1        
-                continue        
-                
-            # Se tiver aula, será verde           
-            elif dia_atual.weekday() == dia:
-                html = html.replace(f'<td class="{nome_dia}">{i}</td>', 
-                                    f'<td class="highlight">{i}</td>')
-                diasTeorico += 1
+    html_months_list = generate_html_calendar(start_date_str, end_date_str, locale='pt_BR')
 
-        except Exception as e:
-            continue
-    return html
+    # Loop sobre anos e meses
+    html_calendar = ''
+    
+    for index, (data, html) in enumerate(html_months_list):
+        mes = data.month
+        ano = data.year
+        isPrimeiroAno = False
+        if index == 0:
+            isPrimeiroAno = True
+            
+        html = pintar_dia(html, 0, mes, ano, feriados, start_date, end_date, isPrimeiroAno)
+        
+        if index == 0 or index % 2 != 0:
+            html_calendar += '<tr class="mes">'
+            html_calendar += f'<td class="mes">{html}</td>'
+            html_calendar += '<td></td>'
+        else:
+            html_calendar += f'<td class="mes" >{html}</td>'
+            html_calendar += '<td></td>'
+            html_calendar += '</tr class="mes">'  
+    
+    with open('head.html', 'r', encoding='utf-8') as file:
+        html_content = file.read()
+        
+    html_content += f"""
+    <table border="0" cellpadding="0" cellspacing="0">
+        {html_calendar}
+            </table>
+    </body>
+    </html>
+    """
 
-# Ajustar as datas de início e fim
-start_date_str = "10/02/2024"
-end_date_str = "17/12/2025"
+    filename = "calendario.html"
 
-start_date = datetime.strptime(start_date_str, "%d/%m/%Y").date()
-end_date = datetime.strptime(end_date_str, "%d/%m/%Y").date()
+    with open(filename, "w", encoding="utf-8") as file:
+        file.write(html_content)
 
-# Definir os feriados
-feriados = get_feriados(start_date.year, end_date.year)
-
-html_months_list = generate_html_calendar(start_date_str, end_date_str, locale='pt_BR')
-
-# Loop sobre anos e meses
-html_calendar = ""
-for index, (data, html) in enumerate(html_months_list):
-    mes = data.month
-    ano = data.year
-    isPrimeiroAno = False
-    if index == 0:
-        isPrimeiroAno = True
-    html_calendar += pintar_dia(html, 0, mes, ano, feriados, start_date, end_date, isPrimeiroAno) 
-
-html_content = f"""
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendário 2024-2025</title>
-    <style>
-        table {{
-            width: 100%;
-            border-collapse: collapse;
-        }}
-        th, td {{
-            border: 1px solid #000;
-            padding: 10px;
-            text-align: center;
-        }}
-        th {{
-            background-color: #f2f2f2;
-        }}
-        .highlight {{
-            background-color: green;
-            color: white;
-            font-weight: bold;
-        }}
-        .highlight-holiday {{
-            background-color: red;
-            color: white;
-            font-weight: bold;
-        }}
-        .highlight-near-holiday {{
-            background-color: yellow;
-            color: white;
-            font-weight: bold;
-        }}        
-    </style>
-</head>
-<body>
-    {html_calendar}
-    <h1>Total de encontros: {diasTeorico}</h1>
-</body>
-</html>
-"""
-
-filename = "calendario.html"
-
-with open(filename, "w", encoding="utf-8") as file:
-    file.write(html_content)
-
-print(f"Calendário salvo em {filename}")
