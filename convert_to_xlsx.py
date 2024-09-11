@@ -1,30 +1,24 @@
-import pandas as pd
-from openpyxl import load_workbook
-from openpyxl.utils import get_column_letter
+import openpyxl
 
-# Caminho do arquivo Excel
-excel_path = 'modelo.xlsx'
+# Carregar a planilha com o cabeçalho
+wb_header = openpyxl.load_workbook('modelo.xlsx')
+sheet_header = wb_header.active
 
-# Carregar o arquivo Excel
-workbook = load_workbook(excel_path)
-sheet = workbook.active  # Escolhe a primeira planilha, pode mudar para outra se necessário
+# Carregar a planilha com o conteúdo
+wb_content = openpyxl.load_workbook('calendario.xlsx')
+sheet_content = wb_content.active
 
-# Tabela HTML como string
-with open('calendario.html', 'r', encoding='utf-8') as file:
-    html_table = file.read()
+# Criar uma nova planilha para combinar cabeçalho e conteúdo
+wb_combined = openpyxl.Workbook()
+sheet_combined = wb_combined.active
 
-# Converter a tabela HTML para DataFrame
-df = pd.read_html(html_table)[0]  # O [0] seleciona o primeiro DataFrame gerado
+# Copiar o cabeçalho para a nova planilha
+for row in sheet_header.iter_rows(values_only=True):
+    sheet_combined.append(row)
 
-# Inserir os dados do DataFrame no Excel a partir da linha 24 e coluna B
-start_row = 24
-start_col = 2  # Coluna B (A=1, B=2, etc.)
+# Copiar o conteúdo para a nova planilha, começando após o cabeçalho
+for row in sheet_content.iter_rows(values_only=True):
+    sheet_combined.append(row)
 
-for r_idx, row in enumerate(df.itertuples(index=False), start=start_row):
-    for c_idx, value in enumerate(row, start=start_col):
-        cell = sheet.cell(row=r_idx, column=c_idx)
-        cell.value = value
-
-# Salvar as alterações no arquivo Excel
-workbook.save(excel_path)
-print(f"Dados inseridos com sucesso a partir da linha {start_row} e coluna B!")
+# Salvar a nova planilha com o cabeçalho e o conteúdo combinados
+wb_combined.save('combinada.xlsx')
