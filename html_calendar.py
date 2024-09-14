@@ -2,7 +2,7 @@ import calendar
 from datetime import date, datetime
 from calendar_utils import generate_html_calendar, get_feriados, pintar_dia
 
-def gerar_calendario():
+def gerar_calendario(nome_aprendiz, empresa, periodo_empresa, curso, inicio_contrato, fim_contrato, duracao_contrato, carga_horaria):
     # Ajustar as datas de início e fim
     start_date_str = "17/01/2024"
     end_date_str = "17/12/2025"
@@ -28,6 +28,8 @@ def gerar_calendario():
             isPrimeiroAno = True
             
         html = pintar_dia(html, 0, mes, ano, feriados, start_date, end_date, isPrimeiroAno)
+
+        html = html.replace(' 2024', '')
         
         if index == 0 or index % 2 != 0:
             html_calendar += '<tr class="mes">'
@@ -40,6 +42,17 @@ def gerar_calendario():
     
     with open('head.html', 'r', encoding='utf-8') as file:
         html_content = file.read()
+    
+    html_content = html_content.replace('[NOME_APRENDIZ]', nome_aprendiz)
+    html_content = html_content.replace('[NOME_EMPRESA]', empresa)
+    html_content = html_content.replace('[PERIODO_EMPRESA]', periodo_empresa)
+    html_content = html_content.replace('[CODIGO_NOME_CH_CURSO]', curso)
+    html_content = html_content.replace('[INICIO_CONTRATO]', inicio_contrato)
+    html_content = html_content.replace('[FIM_CONTRATO]', fim_contrato)
+    html_content = html_content.replace('[DURACAO_CONTRATO]', duracao_contrato)
+    html_content = html_content.replace('[CARGA_HORARIA]', carga_horaria)
+    
+
         
     html_content += f"""
     <table border="0" cellpadding="0" cellspacing="0">
