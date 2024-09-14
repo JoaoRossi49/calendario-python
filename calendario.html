@@ -1,489 +1,696 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="generator" content="PhpSpreadsheet, https://github.com/PHPOffice/PhpSpreadsheet">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta
+      name="generator"
+      content="PhpSpreadsheet, https://github.com/PHPOffice/PhpSpreadsheet"
+    />
     <meta name="author" content="samuel.oliveira@espro.org.br" />
     <meta name="company" content="Microsoft Corporation" />
     <style type="text/css">
-        html { font-family: Calibri, Arial, Helvetica, sans-serif; font-size: 11pt; background-color: white }
-        a.comment-indicator:hover + div.comment { background: #ffd; position: absolute; display: block; border: 1px solid black; padding: 0.5em }
-        a.comment-indicator { background: red; display: inline-block; border: 1px solid black; width: 0.5em; height: 0.5em }
-        div.comment { display: none }
-        table { border-collapse: collapse; page-break-after: always }
-        .gridlines td { border: 1px dotted black }
-        .gridlines th { border: 1px dotted black }
-        .b { text-align: center }
-        .e { text-align: center }
-        .f { text-align: right }
-        .inlineStr { text-align: left }
-        .n { text-align: right }
-        .s { text-align: left }
-        .mes {
-            padding-top: 10px;
-            padding-left: 30px;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        .highlight {
-            background-color: green;
-            color: white;
-            font-weight: bold;
-        }
-        .highlight-holiday {
-            background-color: red;
-            color: white;
-            font-weight: bold;
-        }
-        .highlight-near-holiday {
-            background-color: yellow;
-            color: white;
-            font-weight: bold;
-        }
+      html {
+        font-family: Calibri, Arial, Helvetica, sans-serif;
+        font-size: 11pt;
+        background-color: white;
+      }
+      a.comment-indicator:hover + div.comment {
+        background: #ffd;
+        position: absolute;
+        display: block;
+        border: 1px solid black;
+        padding: 0.5em;
+      }
+      a.comment-indicator {
+        background: red;
+        display: inline-block;
+        border: 1px solid black;
+        width: 0.5em;
+        height: 0.5em;
+      }
+      div.comment {
+        display: none;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 5px;
+        border: none;
+        page-break-after: avoid;
+      }
+      .gridlines td {
+        border: 1px dotted black;
+      }
+      .gridlines th {
+        border: 1px dotted black;
+      }
+      .b {
+        text-align: center;
+      }
+      .e {
+        text-align: center;
+      }
+      .f {
+        text-align: right;
+      }
+      .inlineStr {
+        text-align: left;
+      }
+      .n {
+        text-align: right;
+      }
+      .s {
+        text-align: left;
+      }
+      .mes {
+        padding-top: 10px;
+        padding-left: 45px;
+        font-size: 18px;
+      }
+      .mon, .tue, .wed, .thu, .fri, .sat, .sun{
+        padding-left: 10px;
+        text-align: center;
+      }
+      .td{
+        width: 30px;
+        height: 30px;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      .highlight {
+        background-color: green;
+        color: white;
+        font-weight: bold;
+        text-align: center;
+        padding-left: 10px;
+      }
+      .highlight-holiday {
+        background-color: red;
+        color: white;
+        font-weight: bold;
+        text-align: center;
+        padding-left: 10px;
+      }
+      .highlight-near-holiday {
+        background-color: yellow;
+        color: white;
+        font-weight: bold;
+        text-align: center;
+        padding-left: 10px;
+      }
     </style>
-</head>
-
-<body>
-<style>
-    @page { margin-left: 0.51181102362205in; margin-right: 0.51181102362205in; margin-top: 0.78740157480315in; margin-bottom: 0.78740157480315in; }
-    body { margin-left: 0.51181102362205in; margin-right: 0.51181102362205in; margin-top: 0.78740157480315in; margin-bottom: 0.78740157480315in; }
-</style>
-<table border="0" cellpadding="0" cellspacing="0" id="sheet0" class="sheet0">
-    <col style="width: 50px;">
-    <col style="width: 70px;">
-    <col style="width: 80px;">
-    <col style="width: 90px;">
-    <col style="width: 100px;">
-    <col style="width: 110px;">
-    <col style="width: 120px;">
-    <col style="width: 130px;">
-    <col style="width: 140px;">
-    <col style="width: 150px;">
-    <col style="width: 160px;">
-    <col style="width: 170px;">
-    <col style="width: 180px;">
-    <col style="width: 190px;">
-    <col style="width: 200px;">
-    <col style="width: 210px;">
-    <col style="width: 220px;">
-    <col style="width: 230px;">
-    <col style="width: 240px;">
-    <col style="width: 250px;">
-    <col style="width: 260px;">
-    <tbody>
-        <tbody>
-          <tr class="row0">
-            <td class="column0">&nbsp;</td>
-            <td class="column1">&nbsp;</td>
-            <td class="column2">&nbsp;</td>
-            <td class="column3">&nbsp;</td>
-            <td class="column4">&nbsp;</td>
-            <td class="column5">&nbsp;</td>
-            <td class="column6">&nbsp;</td>
-            <td class="column7">&nbsp;</td>
-            <td class="column8">&nbsp;</td>
-            <td class="column9">&nbsp;</td>
-            <td class="column10">&nbsp;</td>
-            <td class="column11">&nbsp;</td>
-            <td class="column12">&nbsp;</td>
-            <td class="column13">&nbsp;</td>
-            <td class="column14">&nbsp;</td>
-            <td class="column15">&nbsp;</td>
-            <td class="column16">&nbsp;</td>
-            <td class="column17">&nbsp;</td>
-            <td class="column18">&nbsp;</td>
-            <td class="column19">&nbsp;</td>
-            <td class="column20">&nbsp;</td>
-            <td class="column21">&nbsp;</td>
-          </tr>
-          <tr class="row1">
-            <td class="column0">&nbsp;</td>
-            <td class="column1">&nbsp;</td>
-            <td class="column2">&nbsp;</td>
-            <td class="column3 style0 null">
-<div style="position: relative;"><img style="position: absolute; z-index: 1; left: 36px; top: 13px; width: 183px; height: 76px;" src="logo.png" border="0" /></div></td>
-            <td class="column4">&nbsp;</td>
-            <td class="column5">&nbsp;</td>
-            <td class="column6">&nbsp;</td>
-            <td class="column7 style0 null">
-<div style="position: relative;"><img style="position: absolute; z-index: 1; left: 44px; top: 3px; width: 87px; height: 105px;" src="logo-aprendizes.png" border="0" /></div></td>
-            <td class="column8">&nbsp;</td>
-            <td class="column9">&nbsp;</td>
-            <td class="column10">&nbsp;</td>
-            <td class="column11">&nbsp;</td>
-            <td class="column12">&nbsp;</td>
-            <td class="column13">&nbsp;</td>
-            <td class="column14">&nbsp;</td>
-            <td class="column15">&nbsp;</td>
-            <td class="column16">&nbsp;</td>
-            <td class="column17">&nbsp;</td>
-            <td class="column18">&nbsp;</td>
-            <td class="column19">&nbsp;</td>
-            <td class="column20">&nbsp;</td>
-            <td class="column21">&nbsp;</td>
-          </tr>
-          <tr class="row2">
-            <td class="column0">&nbsp;</td>
-            <td class="column1">&nbsp;</td>
-            <td class="column2">&nbsp;</td>
-            <td class="column3">&nbsp;</td>
-            <td class="column4">&nbsp;</td>
-            <td class="column5">&nbsp;</td>
-            <td class="column6">&nbsp;</td>
-            <td class="column7">&nbsp;</td>
-            <td class="column8">&nbsp;</td>
-            <td class="column9">&nbsp;</td>
-            <td class="column10">&nbsp;</td>
-            <td class="column11">&nbsp;</td>
-            <td class="column12">&nbsp;</td>
-            <td class="column13">&nbsp;</td>
-            <td class="column14">&nbsp;</td>
-            <td class="column15">&nbsp;</td>
-            <td class="column16">&nbsp;</td>
-            <td class="column17">&nbsp;</td>
-            <td class="column18">&nbsp;</td>
-            <td class="column19">&nbsp;</td>
-            <td class="column20">&nbsp;</td>
-            <td class="column21">&nbsp;</td>
-          </tr>
-          <tr class="row3">
-            <td class="column0">&nbsp;</td>
-            <td class="column1 style1 null"></td>
-            <td class="column2">&nbsp;</td>
-            <td class="column3">&nbsp;</td>
-            <td class="column4">&nbsp;</td>
-            <td class="column5">&nbsp;</td>
-            <td class="column6">&nbsp;</td>
-            <td class="column7">&nbsp;</td>
-            <td class="column8">&nbsp;</td>
-            <td class="column9">&nbsp;</td>
-            <td class="column10">&nbsp;</td>
-            <td class="column11">&nbsp;</td>
-            <td class="column12">&nbsp;</td>
-            <td class="column13">&nbsp;</td>
-            <td class="column14">&nbsp;</td>
-            <td class="column15">&nbsp;</td>
-            <td class="column16">&nbsp;</td>
-            <td class="column17">&nbsp;</td>
-            <td class="column18">&nbsp;</td>
-            <td class="column19">&nbsp;</td>
-            <td class="column20">&nbsp;</td>
-            <td class="column21">&nbsp;</td>
-          </tr>
-          <tr class="row4">
-            <td class="column0">&nbsp;</td>
-            <td class="column1">&nbsp;</td>
-            <td class="column2">&nbsp;</td>
-            <td class="column3">&nbsp;</td>
-            <td class="column4">&nbsp;</td>
-            <td class="column5">&nbsp;</td>
-            <td class="column6">&nbsp;</td>
-            <td class="column7">&nbsp;</td>
-            <td class="column8">&nbsp;</td>
-            <td class="column9">&nbsp;</td>
-            <td class="column10">&nbsp;</td>
-            <td class="column11">&nbsp;</td>
-            <td class="column12">&nbsp;</td>
-            <td class="column13">&nbsp;</td>
-            <td class="column14">&nbsp;</td>
-            <td class="column15">&nbsp;</td>
-            <td class="column16">&nbsp;</td>
-            <td class="column17">&nbsp;</td>
-            <td class="column18">&nbsp;</td>
-            <td class="column19">&nbsp;</td>
-            <td class="column20">&nbsp;</td>
-            <td class="column21">&nbsp;</td>
-          </tr>
-          <tr class="row5">
-            <td class="column0 style2 null"></td>
-            <td class="column1 style2 null"></td>
-            <td class="column2 style2 null"></td>
-            <td class="column3 style2 null"></td>
-            <td class="column4 style2 null"></td>
-            <td class="column5 style2 null"></td>
-            <td class="column6 style2 null"></td>
-            <td class="column7 style2 null"></td>
-            <td class="column8 style2 null"></td>
-            <td class="column9 style2 null"></td>
-            <td class="column10 style2 null"></td>
-            <td class="column11 style2 null"></td>
-            <td class="column12 style2 null"></td>
-            <td class="column13">&nbsp;</td>
-            <td class="column14">&nbsp;</td>
-            <td class="column15">&nbsp;</td>
-            <td class="column16">&nbsp;</td>
-            <td class="column17">&nbsp;</td>
-            <td class="column18">&nbsp;</td>
-            <td class="column19">&nbsp;</td>
-            <td class="column20">&nbsp;</td>
-            <td class="column21">&nbsp;</td>
-          </tr>
-          <tr class="row6">
-            <td class="column0">&nbsp;</td>
-            <td class="column1 style3 null"></td>
-            <td class="column2">&nbsp;</td>
-            <td class="column3">&nbsp;</td>
-            <td class="column4">&nbsp;</td>
-            <td class="column5">&nbsp;</td>
-            <td class="column6">&nbsp;</td>
-            <td class="column7">&nbsp;</td>
-            <td class="column8">&nbsp;</td>
-            <td class="column9">&nbsp;</td>
-            <td class="column10">&nbsp;</td>
-            <td class="column11">&nbsp;</td>
-            <td class="column12">&nbsp;</td>
-            <td class="column13">&nbsp;</td>
-            <td class="column14">&nbsp;</td>
-            <td class="column15">&nbsp;</td>
-            <td class="column16">&nbsp;</td>
-            <td class="column17">&nbsp;</td>
-            <td class="column18">&nbsp;</td>
-            <td class="column19">&nbsp;</td>
-            <td class="column20">&nbsp;</td>
-            <td class="column21">&nbsp;</td>
-          </tr>
-          <tr class="row7">
-            <td class="column0">&nbsp;</td>
-            <td class="column1 style19 s style21" colspan="10"><span style="font-weight:bold; color:#000000; font-family:'Calibri'; font-size:12pt">Aprendiz: </span><span style="color:#000000; font-family:'Calibri'; font-size:12pt">João Furlanetto Servulles</span></td>
-            <td class="column11 style4 null"></td>
-            <td class="column12 style4 null"></td>
-            <td class="column13">&nbsp;</td>
-            <td class="column14">&nbsp;</td>
-            <td class="column15">&nbsp;</td>
-            <td class="column16">&nbsp;</td>
-            <td class="column17">&nbsp;</td>
-            <td class="column18">&nbsp;</td>
-            <td class="column19">&nbsp;</td>
-            <td class="column20">&nbsp;</td>
-            <td class="column21">&nbsp;</td>
-          </tr>
-          <tr class="row8">
-            <td class="column0">&nbsp;</td>
-            <td class="column1 style19 s style21" colspan="10"><span style="font-weight:bold; color:#000000; font-family:'Calibri'; font-size:12pt">Empresa: </span><span style="color:#000000; font-family:'Calibri'; font-size:12pt">SPSP</span><span style="font-weight:bold; color:#000000; font-family:'Calibri'; font-size:12pt"> - </span><span style="color:#000000; font-family:'Calibri'; font-size:12pt">2ª - 8h às 12h</span></td>
-            <td class="column11 style4 null"></td>
-            <td class="column12 style4 null"></td>
-            <td class="column13">&nbsp;</td>
-            <td class="column14">&nbsp;</td>
-            <td class="column15">&nbsp;</td>
-            <td class="column16">&nbsp;</td>
-            <td class="column17">&nbsp;</td>
-            <td class="column18">&nbsp;</td>
-            <td class="column19">&nbsp;</td>
-            <td class="column20">&nbsp;</td>
-            <td class="column21">&nbsp;</td>
-          </tr>
-          <tr class="row9">
-            <td class="column0">&nbsp;</td>
-            <td class="column1 style22 s style21" colspan="12"><span style="font-weight:bold; color:#000000; font-family:'Calibri'; font-size:12pt">Curso:  78897-</span><span style="color:#000000; font-family:'Calibri'; font-size:12pt">Gestão, Qualidade, Atendimento e Serviços - 4h</span></td>
-            <td class="column13">&nbsp;</td>
-            <td class="column14">&nbsp;</td>
-            <td class="column15">&nbsp;</td>
-            <td class="column16">&nbsp;</td>
-            <td class="column17">&nbsp;</td>
-            <td class="column18">&nbsp;</td>
-            <td class="column19">&nbsp;</td>
-            <td class="column20">&nbsp;</td>
-            <td class="column21">&nbsp;</td>
-          </tr>
-          <tr class="row10">
-            <td class="column0">&nbsp;</td>
-            <td class="column1 style4 null"></td>
-            <td class="column2 style3 null"></td>
-            <td class="column3 style4 null"></td>
-            <td class="column4 style4 null"></td>
-            <td class="column5 style4 null"></td>
-            <td class="column6 style4 null"></td>
-            <td class="column7 style4 null"></td>
-            <td class="column8 style4 null"></td>
-            <td class="column9 style4 null"></td>
-            <td class="column10 style4 null"></td>
-            <td class="column11 style4 null"></td>
-            <td class="column12 style4 null"></td>
-            <td class="column13">&nbsp;</td>
-            <td class="column14">&nbsp;</td>
-            <td class="column15">&nbsp;</td>
-            <td class="column16">&nbsp;</td>
-            <td class="column17">&nbsp;</td>
-            <td class="column18">&nbsp;</td>
-            <td class="column19">&nbsp;</td>
-            <td class="column20">&nbsp;</td>
-            <td class="column21">&nbsp;</td>
-          </tr>
-          <tr class="row11">
-            <td class="column0">&nbsp;</td>
-            <td class="column1 style23 s style21" colspan="12"><span style="font-weight:bold; color:#000000; font-family:'Calibri'; font-size:12pt">Período</span><span style="color:#000000; font-family:'Calibri'; font-size:12pt">: 17/01/2024 a 17/12/2025</span></td>
-            <td class="column13">&nbsp;</td>
-            <td class="column14">&nbsp;</td>
-            <td class="column15">&nbsp;</td>
-            <td class="column16">&nbsp;</td>
-            <td class="column17">&nbsp;</td>
-            <td class="column18">&nbsp;</td>
-            <td class="column19">&nbsp;</td>
-            <td class="column20">&nbsp;</td>
-            <td class="column21">&nbsp;</td>
-          </tr>
-          <tr class="row12">
-            <td class="column0">&nbsp;</td>
-            <td class="column1 style4 null"></td>
-            <td class="column2 style3 null"></td>
-            <td class="column3 style4 null"></td>
-            <td class="column4 style4 null"></td>
-            <td class="column5 style4 null"></td>
-            <td class="column6 style4 null"></td>
-            <td class="column7 style4 null"></td>
-            <td class="column8 style4 null"></td>
-            <td class="column9 style4 null"></td>
-            <td class="column10 style4 null"></td>
-            <td class="column11 style4 null"></td>
-            <td class="column12 style4 null"></td>
-            <td class="column13">&nbsp;</td>
-            <td class="column14">&nbsp;</td>
-            <td class="column15">&nbsp;</td>
-            <td class="column16">&nbsp;</td>
-            <td class="column17">&nbsp;</td>
-            <td class="column18">&nbsp;</td>
-            <td class="column19">&nbsp;</td>
-            <td class="column20">&nbsp;</td>
-            <td class="column21">&nbsp;</td>
-          </tr>
-          <tr class="row13">
-            <td class="column0">&nbsp;</td>
-            <td class="column1 style24 s style17" colspan="12"><span style="font-weight:bold; color:#000000; font-family:'Calibri'; font-size:12pt">Duração:</span><span style="color:#000000; font-family:'Calibri'; font-size:12pt"> 23 meses</span><span style="font-weight:bold; color:#000000; font-family:'Calibri'; font-size:12pt">    Carga horária diária</span><span style="color:#000000; font-family:'Calibri'; font-size:12pt">: 4h</span></td>
-            <td class="column13">&nbsp;</td>
-            <td class="column14">&nbsp;</td>
-            <td class="column15">&nbsp;</td>
-            <td class="column16">&nbsp;</td>
-            <td class="column17 style5 null"></td>
-            <td class="column18">&nbsp;</td>
-            <td class="column19">&nbsp;</td>
-            <td class="column20">&nbsp;</td>
-            <td class="column21">&nbsp;</td>
-          </tr>
-          <tr class="row14">
-            <td class="column0">&nbsp;</td>
-            <td class="column1 style4 null"></td>
-            <td class="column2 style3 null"></td>
-            <td class="column3 style4 null"></td>
-            <td class="column4 style4 null"></td>
-            <td class="column5 style4 null"></td>
-            <td class="column6 style4 null"></td>
-            <td class="column7 style4 null"></td>
-            <td class="column8 style4 null"></td>
-            <td class="column9 style4 null"></td>
-            <td class="column10 style4 null"></td>
-            <td class="column11 style4 null"></td>
-            <td class="column12 style4 null"></td>
-            <td class="column13">&nbsp;</td>
-            <td class="column14">&nbsp;</td>
-            <td class="column15">&nbsp;</td>
-            <td class="column16">&nbsp;</td>
-            <td class="column17">&nbsp;</td>
-            <td class="column18">&nbsp;</td>
-            <td class="column19">&nbsp;</td>
-            <td class="column20">&nbsp;</td>
-            <td class="column21">&nbsp;</td>
-          </tr>
-          <tr class="row15">
-            <td class="column0">&nbsp;</td>
-            <td class="column1 style24 s style17" colspan="12"><span style="font-weight:bold; color:#000000; font-family:'Calibri'; font-size:12pt">Carga Horária:   Teórica: </span><span style="color:#000000; font-family:'Calibri'; font-size:12pt">400h / </span><span style="font-weight:bold; color:#000000; font-family:'Calibri'; font-size:12pt">Prática: </span><span style="color:#000000; font-family:'Calibri'; font-size:12pt">1.428h /</span><span style="font-weight:bold; color:#000000; font-family:'Calibri'; font-size:12pt"> Total: 1.828h</span></td>
-            <td class="column13">&nbsp;</td>
-            <td class="column14">&nbsp;</td>
-            <td class="column15">&nbsp;</td>
-            <td class="column16">&nbsp;</td>
-            <td class="column17">&nbsp;</td>
-            <td class="column18 style5 null"></td>
-            <td class="column19">&nbsp;</td>
-            <td class="column20">&nbsp;</td>
-            <td class="column21">&nbsp;</td>
-          </tr>
-          <tr class="row16">
-            <td class="column0">&nbsp;</td>
-            <td class="column1">&nbsp;</td>
-            <td class="column2">&nbsp;</td>
-            <td class="column3">&nbsp;</td>
-            <td class="column4">&nbsp;</td>
-            <td class="column5">&nbsp;</td>
-            <td class="column6">&nbsp;</td>
-            <td class="column7 style6 null"></td>
-            <td class="column8 style6 null"></td>
-            <td class="column9">&nbsp;</td>
-            <td class="column10">&nbsp;</td>
-            <td class="column11">&nbsp;</td>
-            <td class="column12 style7 null"></td>
-            <td class="column13">&nbsp;</td>
-            <td class="column14">&nbsp;</td>
-            <td class="column15">&nbsp;</td>
-            <td class="column16">&nbsp;</td>
-            <td class="column17">&nbsp;</td>
-            <td class="column18">&nbsp;</td>
-            <td class="column19">&nbsp;</td>
-            <td class="column20">&nbsp;</td>
-            <td class="column21">&nbsp;</td>
-          </tr>
-          <tr class="row17">
-            <td class="column0">&nbsp;</td>
-            <td class="column1 style8 null"></td>
-            <td class="column2 style16 s style17" colspan="3">Treinamento Prático 6h (empresa)</td>
-            <td class="column5 style9 null"></td>
-            <td class="column6 style18 s style17" colspan="4">Treinamento  Teórico -  Etapa Inicial - 12 dias úteis 6h (IL)</td>
-            <td class="column10 style10 null"></td>
-            <td class="column11 style11 s">Feriado</td>
-            <td class="column12 style7 null"></td>
-            <td class="column13">&nbsp;</td>
-            <td class="column14 style6 null"></td>
-            <td class="column15 style6 null"></td>
-            <td class="column16">&nbsp;</td>
-            <td class="column17">&nbsp;</td>
-            <td class="column18">&nbsp;</td>
-            <td class="column19">&nbsp;</td>
-            <td class="column20">&nbsp;</td>
-            <td class="column21">&nbsp;</td>
-          </tr>
-          <tr class="row18">
-            <td class="column0">&nbsp;</td>
-            <td class="column1 style12 null"></td>
-            <td class="column2 style12 null"></td>
-            <td class="column3 style12 null"></td>
-            <td class="column4 style12 null"></td>
-            <td class="column5 style12 null"></td>
-            <td class="column6 style12 null"></td>
-            <td class="column7 style12 null"></td>
-            <td class="column8 style12 null"></td>
-            <td class="column9">&nbsp;</td>
-            <td class="column10 style12 null"></td>
-            <td class="column11 style12 null"></td>
-            <td class="column12 style7 null"></td>
-            <td class="column13">&nbsp;</td>
-            <td class="column14 style6 null"></td>
-            <td class="column15">&nbsp;</td>
-            <td class="column16">&nbsp;</td>
-            <td class="column17">&nbsp;</td>
-            <td class="column18">&nbsp;</td>
-            <td class="column19">&nbsp;</td>
-            <td class="column20">&nbsp;</td>
-            <td class="column21">&nbsp;</td>
-          </tr>
-          <tr class="row19">
-            <td class="column0">&nbsp;</td>
-            <td class="column1 style13 null"></td>
-            <td class="column2 style18 s style17" colspan="3">Treinamento Teórico 6h (Instituto Lóttus)</td>
-            <td class="column5 style14 null"></td>
-            <td class="column6 style18 s style17" colspan="4">Integração (empresa)</td>
-            <td class="column10 style6 null"></td>
-            <td class="column11">&nbsp;</td>
-            <td class="column12 style7 null"></td>
-            <td class="column13">&nbsp;</td>
-            <td class="column14">&nbsp;</td>
-            <td class="column15 style6 null"></td>
-            <td class="column16">&nbsp;</td>
-            <td class="column17">&nbsp;</td>
-            <td class="column18">&nbsp;</td>
-            <td class="column19">&nbsp;</td>
-            <td class="column20">&nbsp;</td>
-            <td class="column21 style5 null"></td>
-          </tr>
-        </tbody>
+  </head>
+  <body>
+    <style>
+      @page {
+        margin-left: 5%;
+        margin-right: 5%;
+        margin-top: 0.4;
+        margin-bottom: 0.4;
+      }
+      body {
+        margin-left: 5%;
+        margin-right: 5%;
+        margin-top: 0.4;
+        margin-bottom: 0.4;
+      }
+    </style>
+    <table
+      border="0"
+      cellpadding="0"
+      cellspacing="0"
+      id="sheet0"
+      class="sheet0"
+    >
+      <col style="width: 50px" />
+      <col style="width: 70px" />
+      <col style="width: 80px" />
+      <col style="width: 90px" />
+      <col style="width: 100px" />
+      <col style="width: 110px" />
+      <col style="width: 120px" />
+      <col style="width: 130px" />
+      <col style="width: 140px" />
+      <col style="width: 150px" />
+      <col style="width: 160px" />
+      <col style="width: 170px" />
+      <col style="width: 180px" />
+      <col style="width: 190px" />
+      <col style="width: 200px" />
+      <col style="width: 210px" />
+      <col style="width: 220px" />
+      <col style="width: 230px" />
+      <col style="width: 240px" />
+      <col style="width: 250px" />
+      <col style="width: 260px" />
+      <tbody></tbody>
+      <tbody>
+        <tr class="row1">
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head style0 null">
+            <div style="position: relative">
+              <img
+                style="
+                  position: relative;
+                  z-index: 1;
+                  left: 36px;
+                  top: 13px;
+                  width: 183px;
+                  height: 76px;
+                "
+                src="logo.png"
+                border="0"
+              />
+            </div>
+          </td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head style0 null">
+            <div style="position: relative">
+              <img
+                style="
+                  position: relative;
+                  z-index: 0;
+                  left: 44px;
+                  top: 3px;
+                  width: 87px;
+                  height: 105px;
+                "
+                src="logo-aprendizes.png"
+                border="0"
+              />
+            </div>
+          </td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+        </tr>
+        <tr class="row2">
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+        </tr>
+        <tr class="row3">
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head style1 null"></td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+        </tr>
+        <tr class="row4">
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+        </tr>
+        <tr class="row5">
+          <td class="td-head style2 null"></td>
+          <td class="td-head style2 null"></td>
+          <td class="td-head style2 null"></td>
+          <td class="td-head style2 null"></td>
+          <td class="td-head style2 null"></td>
+          <td class="td-head style2 null"></td>
+          <td class="td-head style2 null"></td>
+          <td class="td-head style2 null"></td>
+          <td class="td-head style2 null"></td>
+          <td class="td-head style2 null"></td>
+          <td class="td-head style2 null"></td>
+          <td class="td-head style2 null"></td>
+          <td class="td-head style2 null"></td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+        </tr>
+        <tr class="row6">
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head style3 null"></td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+        </tr>
+        <tr class="row7">
+          <td class="td-head">&nbsp;</td>
+          <td class="td-headstyle19 s style21" colspan="10">
+            <span
+              style="
+                font-weight: bold;
+                color: #000000;
+                font-family: 'Calibri';
+                font-size: 12pt;
+              "
+              >Aprendiz: </span
+            ><span
+              style="color: #000000; font-family: 'Calibri'; font-size: 12pt"
+              >João Furlanetto Servulles</span
+            >
+          </td>
+          <td class="td-head style4 null"></td>
+          <td class="td-head style4 null"></td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+        </tr>
+        <tr class="row8">
+          <td class="td-head">&nbsp;</td>
+          <td class="td-headstyle19 s style21" colspan="10">
+            <span
+              style="
+                font-weight: bold;
+                color: #000000;
+                font-family: 'Calibri';
+                font-size: 12pt;
+              "
+              >Empresa: </span
+            ><span
+              style="color: #000000; font-family: 'Calibri'; font-size: 12pt"
+              >SPSP</span
+            ><span
+              style="
+                font-weight: bold;
+                color: #000000;
+                font-family: 'Calibri';
+                font-size: 12pt;
+              "
+            >
+              - </span
+            ><span
+              style="color: #000000; font-family: 'Calibri'; font-size: 12pt"
+              >2ª - 8h às 12h</span
+            >
+          </td>
+          <td class="td-head style4 null"></td>
+          <td class="td-head style4 null"></td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+        </tr>
+        <tr class="row9">
+          <td class="td-head">&nbsp;</td>
+          <td class="td-headstyle22 s style21" colspan="12">
+            <span
+              style="
+                font-weight: bold;
+                color: #000000;
+                font-family: 'Calibri';
+                font-size: 12pt;
+              "
+              >Curso: 78897-</span
+            ><span
+              style="color: #000000; font-family: 'Calibri'; font-size: 12pt"
+              >Gestão, Qualidade, Atendimento e Serviços - 4h</span
+            >
+          </td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+        </tr>
+        <tr class="row10">
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head style4 null"></td>
+          <td class="td-head style3 null"></td>
+          <td class="td-head style4 null"></td>
+          <td class="td-head style4 null"></td>
+          <td class="td-head style4 null"></td>
+          <td class="td-head style4 null"></td>
+          <td class="td-head style4 null"></td>
+          <td class="td-head style4 null"></td>
+          <td class="td-head style4 null"></td>
+          <td class="td-head style4 null"></td>
+          <td class="td-head style4 null"></td>
+          <td class="td-head style4 null"></td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+        </tr>
+        <tr class="row11">
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head style23 s style21" colspan="12">
+            <span
+              style="
+                font-weight: bold;
+                color: #000000;
+                font-family: 'Calibri';
+                font-size: 12pt;
+              "
+              >Período</span
+            ><span
+              style="color: #000000; font-family: 'Calibri'; font-size: 12pt"
+              >: 17/01/2024 a 17/12/2025</span
+            >
+          </td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+        </tr>
+        <tr class="row12">
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head style4 null"></td>
+          <td class="td-head style3 null"></td>
+          <td class="td-head style4 null"></td>
+          <td class="td-head style4 null"></td>
+          <td class="td-head style4 null"></td>
+          <td class="td-head style4 null"></td>
+          <td class="td-head style4 null"></td>
+          <td class="td-head style4 null"></td>
+          <td class="td-head style4 null"></td>
+          <td class="td-head style4 null"></td>
+          <td class="td-head style4 null"></td>
+          <td class="td-head style4 null"></td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+        </tr>
+        <tr class="row13">
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head style24 s style17" colspan="12">
+            <span
+              style="
+                font-weight: bold;
+                color: #000000;
+                font-family: 'Calibri';
+                font-size: 12pt;
+              "
+              >Duração:</span
+            ><span
+              style="color: #000000; font-family: 'Calibri'; font-size: 12pt"
+            >
+              23 meses</span
+            ><span
+              style="
+                font-weight: bold;
+                color: #000000;
+                font-family: 'Calibri';
+                font-size: 12pt;
+              "
+            >
+              Carga horária diária</span
+            ><span
+              style="color: #000000; font-family: 'Calibri'; font-size: 12pt"
+              >: 4h</span
+            >
+          </td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head style5 null"></td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+        </tr>
+        <tr class="row14">
+          <td class="td-head ">&nbsp;</td>
+          <td class="td-head style4 null"></td>
+          <td class="td-head style3 null"></td>
+          <td class="td-head style4 null"></td>
+          <td class="td-head style4 null"></td>
+          <td class="td-head style4 null"></td>
+          <td class="td-head style4 null"></td>
+          <td class="td-head style4 null"></td>
+          <td class="td-head style4 null"></td>
+          <td class="td-head style4 null"></td>
+          <td class="td-head style4 null"></td>
+          <td class="td-head style4 null"></td>
+          <td class="td-head style4 null"></td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+        </tr>
+        <tr class="row15">
+          <td class="td-head">&nbsp;</td>
+          <td class="td-headstyle24 s style17" colspan="12">
+            <span
+              style="
+                font-weight: bold;
+                color: #000000;
+                font-family: 'Calibri';
+                font-size: 12pt;
+              "
+              >Carga Horária: Teórica: </span
+            ><span
+              style="color: #000000; font-family: 'Calibri'; font-size: 12pt"
+              >400h / </span
+            ><span
+              style="
+                font-weight: bold;
+                color: #000000;
+                font-family: 'Calibri';
+                font-size: 12pt;
+              "
+              >Prática: </span
+            ><span
+              style="color: #000000; font-family: 'Calibri'; font-size: 12pt"
+              >1.428h /</span
+            ><span
+              style="
+                font-weight: bold;
+                color: #000000;
+                font-family: 'Calibri';
+                font-size: 12pt;
+              "
+            >
+              Total: 1.828h</span
+            >
+          </td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head style5 null"></td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+        </tr>
+        <tr class="row16">
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head style6 null"></td>
+          <td class="td-head style6 null"></td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head style7 null"></td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+        </tr>
+        <tr class="row17">
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head style8 null"></td>
+          <td class="td-head style16 s style17" colspan="3">
+            Treinamento Prático 6h (empresa)
+          </td>
+          <td class="td-head style9 null"></td>
+          <td class="td-head style18 s style17" colspan="4">
+            Treinamento Teórico - Etapa Inicial - 12 dias úteis 6h (IL)
+          </td>
+          <td class="td-head style10 null"></td>
+          <td class="td-head style11 s">Feriado</td>
+          <td class="td-head style7 null"></td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head style6 null"></td>
+          <td class="td-head style6 null"></td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+        </tr>
+        <tr class="row18">
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head style12 null"></td>
+          <td class="td-head style12 null"></td>
+          <td class="td-head style12 null"></td>
+          <td class="td-head style12 null"></td>
+          <td class="td-head style12 null"></td>
+          <td class="td-head style12 null"></td>
+          <td class="td-head style12 null"></td>
+          <td class="td-head style12 null"></td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head style12 null"></td>
+          <td class="td-head style12 null"></td>
+          <td class="td-head style7 null"></td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head style6 null"></td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+        </tr>
+        <tr class="row19">
+          <td class="td-head">&nbsp;</td>
+          <td class="td-headstyle13 null"></td>
+          <td class="td-headstyle18 s style17" colspan="3">
+            Treinamento Teórico 6h (Instituto Lóttus)
+          </td>
+          <td class="td-headstyle14 null"></td>
+          <td class="td-headstyle18 s style17" colspan="4">
+            Integração (empresa)
+          </td>
+          <td class="td-head style6 null"></td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head style7 null"></td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head style6 null"></td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head">&nbsp;</td>
+          <td class="td-head style5 null"></td>
+        </tr>
+      </tbody>
     </table>
 
     <table border="0" cellpadding="0" cellspacing="0">
